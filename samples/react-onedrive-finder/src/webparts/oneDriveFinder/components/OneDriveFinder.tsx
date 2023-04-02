@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './OneDriveFinder.module.scss';
 import { IOneDriveFinderProps } from './IOneDriveFinderProps';
 import { IOneDriveFinderState } from './IOneDriveFinderState';
-import { FileList } from '@microsoft/mgt-react';
+import { FileList } from '@microsoft/mgt-react/dist/es6/spfx';
 import { DialogFile } from './Dialog/DialogFile';
 import { Breadcrumb, IBreadcrumbItem } from 'office-ui-fabric-react/lib/Breadcrumb';
 import { Dropdown, IDropdownOption, IDropdownProps } from 'office-ui-fabric-react/lib/Dropdown';
@@ -47,8 +47,8 @@ const onRenderCaretDown = (): JSX.Element => {
 const stackTokens: Partial<IStackTokens> = { childrenGap: 20 };
 
 /**
- * 
- * @param option 
+ *
+ * @param option
  * Render dropdown list of sites.
  */
 const onRenderOption = (option: IDropdownOption): JSX.Element => {
@@ -67,7 +67,7 @@ const onRenderOption = (option: IDropdownOption): JSX.Element => {
 };
 
 /**
- * Render Selected dropdown 
+ * Render Selected dropdown
  */
 const onRenderTitle = (options: IDropdownOption[]): JSX.Element => {
   const option = options[0];
@@ -361,8 +361,8 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
   }
 
   /**
-   * 
-   * @param e 
+   *
+   * @param e
    * Capture file or folder and manages breadcrumb
    */
   private manageFolder = (e: any) => {
@@ -458,8 +458,8 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
     this.getSiteData(graphData);
   }
   /**
-   * 
-   * @param DomainData 
+   *
+   * @param DomainData
    * Retrieves sites from domain
    */
   private getSiteData = async (DomainData) => {
@@ -479,7 +479,7 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
       });
     });
 
-    //Sort by Web url 
+    //Sort by Web url
     sharedSitesOptions = sharedSitesOptions.sort((Option1, Option2) => {
       if (Option1.data.webUrl > Option2.data.webUrl) {
         return 1;
@@ -507,7 +507,7 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
     );
   }
   /**
-  * Method to Connect Graph 
+  * Method to Connect Graph
   */
   private getGraphContent = (graphQuery: string) => {
 

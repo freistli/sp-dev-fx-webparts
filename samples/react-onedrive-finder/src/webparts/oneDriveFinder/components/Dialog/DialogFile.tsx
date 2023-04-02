@@ -3,7 +3,7 @@ import { IDialogFileProps } from './IDialogFileProps';
 import { Dialog, DialogFooter, DialogType } from 'office-ui-fabric-react/lib/Dialog';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { File, ViewType, Person, PersonViewType } from '@microsoft/mgt-react';
+import { File, ViewType } from '@microsoft/mgt-react';
 
 export function DialogFile(props: IDialogFileProps) {
     let _queryString = "";
@@ -52,4 +52,4 @@ export function DialogFile(props: IDialogFileProps) {
             </DialogFooter>
         </Dialog>
     );
-} 
+}
