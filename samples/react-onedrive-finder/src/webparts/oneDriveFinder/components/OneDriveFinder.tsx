@@ -13,6 +13,8 @@ import { IconButton } from 'office-ui-fabric-react/lib/Button';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { Stack, IStackTokens } from 'office-ui-fabric-react/lib/Stack';
 import { MgtFileList, LocalizationHelper } from '@microsoft/mgt';
+import ChatUI from './Chat/ChatUI';
+
 
 const theme: ITheme = getTheme();
 const { palette, fonts } = theme;
@@ -239,6 +241,8 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
         <div className={styles.pageWrapper}>
           <div className={styles.row}>
             <div className={styles.column}>
+
+             <ChatUI></ChatUI>
               <Dropdown
                 placeholder="default"
                 label="Styles"

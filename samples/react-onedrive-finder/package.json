@@ -22,7 +22,8 @@
     "gulp-cli": "^2.3.0",
     "office-ui-fabric-react": "^6.214.0",
     "react": "^16.8.5",
-    "react-dom": "^16.8.5"
+    "react-dom": "^16.8.5",
+    "@fluentui/react-northstar": "0.66.2"
   },
   "devDependencies": {
     "@microsoft/rush-stack-compiler-4.5": "^0.4.0",
