@@ -11,6 +11,7 @@ import { Providers, SharePointProvider } from '@microsoft/mgt';
 import * as strings from 'OneDriveFinderWebPartStrings';
 import OneDriveFinder from './components/OneDriveFinder';
 import { IOneDriveFinderProps } from './components/IOneDriveFinderProps';
+import { HttpClient,HttpClientResponse,AadHttpClient } from '@microsoft/sp-http';
 
 export interface IOneDriveFinderWebPartProps {
   description: string;

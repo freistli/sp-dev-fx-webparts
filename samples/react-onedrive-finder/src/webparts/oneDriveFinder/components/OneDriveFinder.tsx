@@ -6,7 +6,6 @@ import { FileList } from '@microsoft/mgt-react/dist/es6/spfx';
 import { DialogFile } from './Dialog/DialogFile';
 import { Breadcrumb, IBreadcrumbItem } from 'office-ui-fabric-react/lib/Breadcrumb';
 import { Dropdown, IDropdownOption, IDropdownProps } from 'office-ui-fabric-react/lib/Dropdown';
-import { AadHttpClient } from "@microsoft/sp-http";
 import { ITheme, mergeStyleSets, getTheme } from 'office-ui-fabric-react/lib/Styling';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { IconButton } from 'office-ui-fabric-react/lib/Button';
@@ -14,7 +13,7 @@ import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { Stack, IStackTokens } from 'office-ui-fabric-react/lib/Stack';
 import { MgtFileList, LocalizationHelper } from '@microsoft/mgt';
 import ChatUI from './Chat/ChatUI';
-
+import { HttpClient,HttpClientResponse,AadHttpClient } from '@microsoft/sp-http';
 
 const theme: ITheme = getTheme();
 const { palette, fonts } = theme;
@@ -112,7 +111,7 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
 
     this.state = {
       breadcrumbItem: [],
-      pageSize: 50,
+      pageSize: 10,
       siteID: "",
       siteItems: [],
       itemID: "",
@@ -242,7 +241,7 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
           <div className={styles.row}>
             <div className={styles.column}>
 
-             <ChatUI></ChatUI>
+             <ChatUI fileItem={this.state.dialogFile} httpClient={this.props.context.httpClient}></ChatUI>
               <Dropdown
                 placeholder="default"
                 label="Styles"
@@ -269,7 +268,7 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
             </div>
             <div className={styles.column}>
               <Dropdown
-                placeholder="50 Items"
+                placeholder="10 Items"
                 label="Filter Items"
                 options={[
                   { key: 5, text: '5 Items' },
@@ -291,11 +290,9 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
                   { key: "docx", text: 'docx' },
                   { key: "xlsx", text: 'xlsx' },
                   { key: "pptx", text: "pptx" },
-                  { key: "one", text: "one" },
                   { key: "pdf", text: "pdf" },
                   { key: "txt", text: "txt" },
                   { key: "jpg", text: "jpg" },
-                  { key: "gif", text: "gif" },
                   { key: "png", text: "png" },
                 ]}
                 onChange={checkFileExtensions}
