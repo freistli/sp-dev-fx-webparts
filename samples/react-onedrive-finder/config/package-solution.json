@@ -3,7 +3,7 @@
   "solution": {
     "name": "react-onedrive-finder-client-side-solution",
     "id": "63bcee97-4373-4a30-9c62-a1369b4d08ba",
-    "version": "1.0.3.0",
+    "version": "1.0.6.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -23,6 +23,12 @@
   }, {
       "resource": "Microsoft Graph",
       "scope": "Sites.Read.All"
+  },{"resource": "SPFX Resource",
+    "scope": "user_impersonation"
+  },
+  {
+    "resource": "Microsoft Graph",
+    "scope": "User.Read"
   }]
   },
   "paths": {

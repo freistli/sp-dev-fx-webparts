@@ -28,7 +28,7 @@ const ChatUI = (props: IChatUIProps) => {
     if(props?.fileItem == null)
     {
       let newMessages = [...messages]
-      newMessages.push({ message: <Chat.Message content="Please selecct a document firstly" author="AI Bot" timestamp={new Date().toLocaleString()} />,
+      newMessages.push({ message: <Chat.Message content="Please select a document firstly" author="AI Bot" timestamp={new Date().toLocaleString()} />,
       contentPosition: 'start',
       attached: 'top'});
       setMessages(newMessages);
@@ -42,6 +42,8 @@ const ChatUI = (props: IChatUIProps) => {
       }
       );
       setMessages(newMessages);
+
+      console.log(messages)
 
       const parameters: {[key: string]: string} = {};
       parameters["prompt"] = inputMessage;
@@ -57,38 +59,77 @@ const ChatUI = (props: IChatUIProps) => {
             "Content-Type": "application/json"
         }};
 
-      props.httpClient
-            .post(process.env.REACT_APP_API_URL,
-              HttpClient.configurations.v1,spHttpClientOption)
-            .then((response: HttpClientResponse)=> {
 
-              if (response.ok == true )
-              {
-                response.text().then((text) => {
-                console.log("Submit successfully" + text);
+      //console.log(process.env.REACT_APP_API_URL);
 
-                const str = text.replace(/^.*\s*Answer:\s*(.*)$/sm,"$1");
-                const items1 = str.split("\n").map((item) => {
-                  return <div key={item.trim()}>{item.trim()}</div>;
-                });
+      var aadClientUrl = "<SPFX Resources in AAD>"
+      var azfUrl = "<AZ Function URL>"
 
-                let newMessages2 = [...newMessages]
-                newMessages2.push({
-                  gutter: <Avatar {...janeAvatar} />,
-                  message: (<Chat.Message content= {items1}
-                 author="AI Bot" timestamp={new Date().toLocaleString()} />),
-                contentPosition: 'start'
-                });
-                setMessages(newMessages2);
-              });
-              }
-            }).catch(error =>
-              {
-                console.error(error)
-            });
-    }
-    }
 
+      if(props.aadHttpClientFactory === null)
+      {
+              props.httpClient
+                    .post(azfUrl,
+                      HttpClient.configurations.v1,spHttpClientOption)
+                    .then((response: HttpClientResponse)=> {
+
+                      if (response.ok == true )
+                      {
+                        response.text().then((text) => {
+                        console.log("Submit successfully" + text);
+
+                        const str = text.replace(/^.*\s*Answer:\s*(.*)$/sm,"$1");
+                        const items1 = str.split("\n").map((item) => {
+                          return <div key={item.trim()}>{item.trim()}</div>;
+                        });
+
+                        let newMessages2 = [...newMessages]
+                        newMessages2.push({
+                          gutter: <Avatar {...janeAvatar} />,
+                          message: (<Chat.Message content= {items1}
+                        author="AI Bot" timestamp={new Date().toLocaleString()} />),
+                        contentPosition: 'start'
+                        });
+                        setMessages(newMessages2);
+                      });
+                      }
+                    }).catch(error =>
+                      {
+                        console.error(error)
+                    });
+          }
+          else
+          {
+            props.aadHttpClientFactory.getClient(aadClientUrl).then((client: AadHttpClient) => {
+              client.post(azfUrl,
+                AadHttpClient.configurations.v1,spHttpClientOption)
+                .then((response: HttpClientResponse)=> {
+
+                  if (response.ok == true )
+                  {
+                    response.text().then((text) => {
+                    console.log("Submit successfully" + text);
+                    const str = text.replace(/^.*\s*Answer:\s*(.*)$/sm,"$1");
+                    const items1 = str.split("\n").map((item) => {
+                      return <div key={item.trim()}>{item.trim()}</div>;
+                    });
+
+                    let newMessages2 = [...newMessages]
+                    newMessages2.push({
+                      gutter: <Avatar {...janeAvatar} />,
+                      message: (<Chat.Message content= {items1}
+                     author="AI Bot" timestamp={new Date().toLocaleString()} />),
+                    contentPosition: 'start'
+                    });
+                    setMessages(newMessages2);
+                  });
+                  }
+                }).catch(error => { console.error(error) });
+
+              }).catch(error => { console.error(error) });
+          }
+        }
+      }
     function handleKeyDown(event) {
       if (event.keyCode === 13)
       {
@@ -131,7 +172,7 @@ const ChatUI = (props: IChatUIProps) => {
     }}
 
       header="Chat with Docs"
-      trigger={<Button content="Open Chat" primary />}
+      trigger={<Button content="Chat" primary styles={{marginTop: "10px"}}/>}
     />
 
     </Provider>

@@ -241,7 +241,6 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
           <div className={styles.row}>
             <div className={styles.column}>
 
-             <ChatUI fileItem={this.state.dialogFile} httpClient={this.props.context.httpClient}></ChatUI>
               <Dropdown
                 placeholder="default"
                 label="Styles"
@@ -298,7 +297,9 @@ export default class OneDriveFinder extends React.Component<IOneDriveFinderProps
                 onChange={checkFileExtensions}
                 styles={dropdownFilterStyles}
               />
-
+            </div>
+            <div className={styles.column}>
+            <ChatUI fileItem={this.state.dialogFile} httpClient={this.props.context.httpClient} aadHttpClientFactory={this.props.context.aadHttpClientFactory}></ChatUI>
             </div>
           </div>
         </div>
