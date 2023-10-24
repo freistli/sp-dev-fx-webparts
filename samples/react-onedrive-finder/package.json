@@ -12,6 +12,7 @@
     "test": "gulp test"
   },
   "dependencies": {
+    "@fluentui/react-northstar": "0.66.2",
     "@microsoft/mgt": "^2.9.2",
     "@microsoft/mgt-react": "^2.9.2",
     "@microsoft/sp-core-library": "1.15.0",
@@ -22,8 +23,7 @@
     "gulp-cli": "^2.3.0",
     "office-ui-fabric-react": "^6.214.0",
     "react": "^16.8.5",
-    "react-dom": "^16.8.5",
-    "@fluentui/react-northstar": "0.66.2"
+    "react-dom": "^16.8.5"
   },
   "devDependencies": {
     "@microsoft/rush-stack-compiler-4.5": "^0.4.0",
